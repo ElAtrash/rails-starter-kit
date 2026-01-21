@@ -14,7 +14,7 @@ class RegistrationsController < ApplicationController
       start_new_session_for user
       redirect_to root_path, notice: "Welcome! Your account has been created."
     else
-      render inertia: "Auth/Register", status: :unprocessable_entity
+      render inertia: "Auth/Register", status: :unprocessable_content
     end
   end
 

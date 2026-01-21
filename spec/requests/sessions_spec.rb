@@ -22,7 +22,7 @@ RSpec.describe "Sessions", type: :request do
     it "shows an alert with incorrect credentials" do
       post session_path, params: { email_address: "login@example.com", password: "wrongpassword" }
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(flash[:alert]).to eq("Invalid email or password.")
     end
   end

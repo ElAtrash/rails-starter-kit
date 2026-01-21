@@ -28,13 +28,16 @@ class PasswordsController < ApplicationController
       @user.sessions.destroy_all
       redirect_to new_session_path, notice: "Password has been reset."
     else
-      render inertia: "Passwords/Edit", props: { token: params[:token] }, status: :unprocessable_entity
+      render inertia: "Passwords/Edit", props: { token: params[:token] }, status: :unprocessable_content
     end
   end
 
   private
     def set_user_by_token
       @user = User.find_by_token_for(:password_reset, params[:token])
+      unless @user
+        redirect_to new_password_path, alert: "Password reset link is invalid or has expired."
+      end
     rescue ActiveSupport::MessageVerifier::InvalidSignature
       redirect_to new_password_path, alert: "Password reset link is invalid or has expired."
     end
