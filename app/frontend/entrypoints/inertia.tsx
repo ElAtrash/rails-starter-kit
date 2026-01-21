@@ -2,6 +2,8 @@ import "./application.css";
 import { createInertiaApp, type ResolvedComponent } from "@inertiajs/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import AppLayout from "../layouts/AppLayout";
+import { ReactNode } from "react";
 
 void createInertiaApp({
   // Set default page title
@@ -27,7 +29,7 @@ void createInertiaApp({
     // and use the following line.
     // see https://inertia-rails.dev/guide/pages#default-layouts
     //
-    // page.default.layout ||= (page: ReactNode) => (<Layout>{page}</Layout>)
+    page.default.layout = page.default.layout || ((page: ReactNode) => <AppLayout>{page}</AppLayout>)
 
     return page
   },
