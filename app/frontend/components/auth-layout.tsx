@@ -1,6 +1,7 @@
 import { FlashMessages } from "@/components/flash-messages";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Link } from "@inertiajs/react";
+import { Toaster } from "sonner";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -12,6 +13,7 @@ export function AuthLayout({ children, title, footerLink }: AuthLayoutProps) {
   return (
     <>
       <FlashMessages />
+      <Toaster position="top-right" />
       <div className="flex min-h-screen items-center justify-center bg-zinc-50 p-4">
         <Card className="w-full max-w-100 shadow-lg">
           <CardHeader className="space-y-1">

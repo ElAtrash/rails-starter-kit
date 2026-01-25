@@ -1,12 +1,31 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { AuthLayout } from "@/components/auth-layout";
-import { Head, useForm } from "@inertiajs/react";
+import { FormField } from "@/components/form-field";
+import { Button } from "@/components/ui/button";
+import { Head, useForm, usePage } from "@inertiajs/react";
+import { useEffect, useRef } from "react";
+import { toast } from "sonner";
 
 export default function New() {
-  const { data, setData, post, processing, errors } = useForm({
-    email_address: "",
-  });
+  const { success } = usePage().props as any;
+  const shownRef = useRef(false);
+  const { data, setData, post, processing, errors, clearErrors, reset } =
+    useForm({
+      email_address: "",
+    });
+
+  useEffect(() => {
+    if (success && !shownRef.current) {
+      shownRef.current = true;
+      toast.success(success);
+
+      reset();
+    }
+  }, [success, reset]);
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData("email_address", e.target.value);
+    if (errors.email_address) clearErrors("email_address");
+  };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,26 +35,22 @@ export default function New() {
   return (
     <AuthLayout
       title="Forgot password?"
-      footerLink={{ href: "/session/new", label: "Login", text: "Back to login" }}
+      footerLink={{
+        href: "/session/new",
+        label: "Login",
+        text: "Back to login",
+      }}
     >
       <Head title="Forgot Password" />
 
       <form onSubmit={submit} className="space-y-6">
-        <div className="space-y-2">
-          <Input
-            id="email_address"
-            aria-label="Email Address"
-            type="email"
-            value={data.email_address}
-            onChange={(e) => setData("email_address", e.target.value)}
-            placeholder="Email Address"
-            required
-            autoFocus
-          />
-          {errors.email_address && (
-            <p className="text-sm text-destructive">{errors.email_address}</p>
-          )}
-        </div>
+        <FormField
+          type="email"
+          placeholder="Email Address"
+          value={data.email_address}
+          onChange={handleEmailChange}
+          error={errors.email_address}
+        />
 
         <Button type="submit" className="w-full" disabled={processing}>
           {processing ? "Sending link..." : "Send Reset Link"}
