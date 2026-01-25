@@ -10,11 +10,25 @@ class PasswordsController < ApplicationController
   end
 
   def create
-    if user = User.find_by(email_address: params[:email_address])
-      PasswordsMailer.reset(user).deliver_later
+    email = params[:email_address].to_s.strip
+
+    unless email.present?
+      render inertia: "Passwords/New", props: {
+        errors: { email_address: "Email address is required" }
+      }, status: :unprocessable_content
+      return
     end
 
-    redirect_to new_session_path, notice: "Password reset instructions sent (if user with that email address exists)."
+    if user = User.find_by(email_address: email)
+      PasswordsMailer.reset(user).deliver_later
+      message = "Reset instructions sent! Check your email."
+    else
+      message = "If that email address is in our system, you'll receive password reset instructions."
+    end
+
+    render inertia: "Passwords/New", props: {
+      success: message
+    }
   end
 
   def edit

@@ -2,13 +2,17 @@ import { AuthLayout } from "@/components/auth-layout";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Head, Link, useForm, usePage } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import { AlertCircle } from "lucide-react";
 
-export default function Login() {
-  const { flash } = usePage().props as any;
+interface LoginForm {
+  email_address: string;
+  password: string;
+  auth?: string;
+}
 
-  const { data, setData, post, processing, errors } = useForm({
+export default function Login() {
+  const { data, setData, post, processing, errors } = useForm<LoginForm>({
     email_address: "",
     password: "",
   });
@@ -30,10 +34,10 @@ export default function Login() {
       <Head title="Login" />
 
       <form onSubmit={submit} className="space-y-4">
-        {flash?.alert && (
+        {errors.auth && (
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{flash.alert}</AlertDescription>
+            <AlertDescription>{errors.auth}</AlertDescription>
           </Alert>
         )}
 

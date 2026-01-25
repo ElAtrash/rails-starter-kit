@@ -13,8 +13,9 @@ class SessionsController < ApplicationController
       start_new_session_for user
       redirect_to after_authentication_url
     else
-      flash.now[:alert] = "Invalid email or password."
-      render inertia: "Auth/Login", status: :unprocessable_content
+      redirect_to new_session_path, inertia: {
+      errors: { auth: "Invalid email or password." }
+    }
     end
   end
 
