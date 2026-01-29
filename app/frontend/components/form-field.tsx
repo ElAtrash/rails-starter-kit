@@ -23,6 +23,7 @@ export const ErrorMessage = ({
 
 // Reusable form field component
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 
 export const FormField = ({
   type = "text",
@@ -38,19 +39,23 @@ export const FormField = ({
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string | string[];
   helperText?: string;
-}) => (
-  <div className="grid gap-1">
-    <Input
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      aria-invalid={!!error}
-      className={error ? "border-destructive" : ""}
-    />
-    {helperText && !error && (
-      <p className="text-xs text-gray-500">{helperText}</p>
-    )}
-    <ErrorMessage message={error} />
-  </div>
-);
+}) => {
+  const InputComponent = type === "password" ? PasswordInput : Input;
+
+  return (
+    <div className="grid gap-1">
+      <InputComponent
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        aria-invalid={!!error}
+        className={error ? "border-destructive" : ""}
+      />
+      {helperText && !error && (
+        <p className="text-xs text-gray-500">{helperText}</p>
+      )}
+      <ErrorMessage message={error} />
+    </div>
+  );
+};

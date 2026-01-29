@@ -2,6 +2,7 @@ import { AuthLayout } from "@/components/auth-layout";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { AlertCircle } from "lucide-react";
 
@@ -56,8 +57,7 @@ export default function Login() {
         </div>
 
         <div className="grid gap-2">
-          <Input
-            type="password"
+          <PasswordInput
             aria-label="Password"
             placeholder="Password"
             value={data.password}
