@@ -1,4 +1,6 @@
 import { AuthLayout } from "@/components/auth-layout";
+import { GoogleOAuthButton } from "@/components/google-oauth-button";
+import { OAuthDivider } from "@/components/oauth-divider";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,6 +35,10 @@ export default function Login() {
       }}
     >
       <Head title="Login" />
+
+      <GoogleOAuthButton label="Sign in with Google" />
+
+      <OAuthDivider />
 
       <form onSubmit={submit} className="space-y-4">
         {errors.auth && (

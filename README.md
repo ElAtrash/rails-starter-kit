@@ -6,6 +6,29 @@ This starter kit is designed to let you **spin up new projects quickly** without
 
 ---
 
+## Quick Start
+
+1. Clone this repository
+2. Copy environment variables: `cp .env.example .env`
+3. Set up Google OAuth credentials (see `GOOGLE_OAUTH_SETUP.md`)
+4. Install dependencies: `bundle install && npm install`
+5. Setup database: `rails db:setup`
+6. Start server: `./bin/dev`
+
+# Google OAuth Setup
+
+This starter kit includes Google OAuth authentication. You'll need to:
+
+1. Create a new Google Cloud Project for your application
+2. Set up OAuth credentials
+3. Add them to your `.env` file
+
+**See detailed instructions in [GOOGLE_OAUTH_SETUP.md](GOOGLE_OAUTH_SETUP.md)**
+
+**A stable version of this starter kit without oauth is available through the `stable_without_oauth` branch.**
+
+---
+
 ## ✨ Features
 
 ### Backend
@@ -14,6 +37,7 @@ This starter kit is designed to let you **spin up new projects quickly** without
   - Login
   - Registration
   - Password reset
+  - Google OAuth
 - ERB views replaced with **React (JSX) components via Inertia**
 - RESTful Rails architecture
 - PostgreSQL (default, configurable)
@@ -39,7 +63,7 @@ This starter kit is designed to let you **spin up new projects quickly** without
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
 | Layer        | Technology |
 |--------------|------------|
@@ -49,4 +73,4 @@ This starter kit is designed to let you **spin up new projects quickly** without
 | Bundler      | Vite |
 | Styling      | Tailwind CSS + shadcn/ui |
 | Testing      | RSpec, FactoryBot, Faker |
-| Auth         | Rails 8 built-in authentication |
+| Auth         | Rails 8 built-in authentication, Google OAuth |
