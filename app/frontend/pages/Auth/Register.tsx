@@ -1,5 +1,7 @@
 import { AuthLayout } from "@/components/auth-layout";
 import { FormField } from "@/components/form-field";
+import { GoogleOAuthButton } from "@/components/google-oauth-button";
+import { OAuthDivider } from "@/components/oauth-divider";
 import { Button } from "@/components/ui/button";
 import { Head, useForm } from "@inertiajs/react";
 
@@ -38,6 +40,10 @@ export default function Register() {
       }}
     >
       <Head title="Sign Up" />
+
+      <GoogleOAuthButton label="Sign up with Google" />
+
+      <OAuthDivider />
 
       <form onSubmit={submit} className="space-y-4">
         <FormField
