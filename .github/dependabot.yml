@@ -1,37 +1,91 @@
 version: 2
 updates:
+  # ── main ──
   - package-ecosystem: "bundler"
     directory: "/"
+    target-branch: "main"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
       - "ruby"
+      - "branch:main"
 
   - package-ecosystem: "npm"
     directory: "/"
+    target-branch: "main"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
       - "javascript"
+      - "branch:main"
 
   - package-ecosystem: "github-actions"
     directory: "/"
+    target-branch: "main"
     schedule:
       interval: "monthly"
     open-pull-requests-limit: 5
     labels:
       - "dependencies"
       - "github-actions"
+      - "branch:main"
 
   - package-ecosystem: "docker"
     directory: "/"
+    target-branch: "main"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
     labels:
       - "dependencies"
       - "docker"
+      - "branch:main"
+
+  # ── stable_without_oauth ──
+  - package-ecosystem: "bundler"
+    directory: "/"
+    target-branch: "stable_without_oauth"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "ruby"
+      - "branch:stable_without_oauth"
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    target-branch: "stable_without_oauth"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "javascript"
+      - "branch:stable_without_oauth"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "stable_without_oauth"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "branch:stable_without_oauth"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    target-branch: "stable_without_oauth"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "docker"
+      - "branch:stable_without_oauth"
