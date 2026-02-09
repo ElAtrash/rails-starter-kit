@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, stable_without_oauth]
 
 env:
   RAILS_ENV: test
