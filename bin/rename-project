@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+  echo "Usage: bin/rename-project <new_name>"
+  echo ""
+  echo "  new_name   snake_case app name (e.g. my_cool_app)"
+  echo ""
+  echo "This will replace all occurrences of 'rails_starter_kit' / 'RailsStarterKit'"
+  echo "across config files with your new project name."
+  exit 1
+fi
+
+RAW_NAME="$1"
+
+# Derive naming conventions
+SNAKE_CASE=$(echo "$RAW_NAME" | perl -pe 's/([a-z])([A-Z])/$1_$2/g' | sed 's/[^a-zA-Z0-9]/_/g' | sed 's/__*/_/g' | sed 's/^_//;s/_$//' | tr '[:upper:]' '[:lower:]')
+PASCAL_CASE=$(echo "$SNAKE_CASE" | perl -pe 's/(^|_)(.)/uc($2)/ge')
+SCREAMING_SNAKE=$(echo "$SNAKE_CASE" | tr '[:lower:]' '[:upper:]')
+
+echo "Renaming project:"
+echo "  snake_case:  $SNAKE_CASE"
+echo "  PascalCase:  $PASCAL_CASE"
+echo "  UPPER_SNAKE: $SCREAMING_SNAKE"
+echo ""
+
+# Files that contain the old project name
+FILES=(
+  config/application.rb
+  config/database.yml
+  config/deploy.yml
+  .github/workflows/ci.yml
+)
+
+for file in "${FILES[@]}"; do
+  if [ -f "$file" ]; then
+    sed -i '' "s/RailsStarterKit/${PASCAL_CASE}/g" "$file"
+    sed -i '' "s/RAILS_STARTER_KIT/${SCREAMING_SNAKE}/g" "$file"
+    sed -i '' "s/rails_starter_kit/${SNAKE_CASE}/g" "$file"
+    echo "  Updated $file"
+  else
+    echo "  Skipped $file (not found)"
+  fi
+done
+
+echo ""
+echo "Done! Next steps:"
+echo "  1. Run: rails db:create"
+echo "  2. Run: rails db:migrate"
+echo "  3. Verify with: rails runner 'puts Rails.application.class.module_parent_name'"
