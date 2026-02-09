@@ -8,28 +8,21 @@ This starter kit is designed to let you **spin up new projects quickly** without
 
 ## Quick Start
 
-1. Clone this repository
-2. Copy environment variables: `cp .env.example .env`
-3. Set up Google OAuth credentials (see `GOOGLE_OAUTH_SETUP.md`)
-4. Install dependencies: `bundle install && npm install`
-5. Setup database: `rails db:setup`
-6. Start server: `./bin/dev`
+1. Use this repository as a [GitHub template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) — choose your starting branch:
+   - **`main`** — includes Google OAuth
+   - **`stable_without_oauth`** — authentication without OAuth
+2. Rename the project: `bin/rename-project my_new_app`
+3. Copy environment variables: `cp .env.example .env`
+4. Set up Google OAuth credentials (see [GOOGLE_OAUTH_SETUP.md](GOOGLE_OAUTH_SETUP.md)) — skip if using `stable_without_oauth`
+5. Install dependencies: `bundle install && npm install`
+6. Setup database: `rails db:create db:migrate`
+7. Start server: `./bin/dev`
 
-# Google OAuth Setup
-
-This starter kit includes Google OAuth authentication. You'll need to:
-
-1. Create a new Google Cloud Project for your application
-2. Set up OAuth credentials
-3. Add them to your `.env` file
-
-**See detailed instructions in [GOOGLE_OAUTH_SETUP.md](GOOGLE_OAUTH_SETUP.md)**
-
-**A stable version of this starter kit without oauth is available through the `stable_without_oauth` branch.**
+`bin/rename-project app_name` replaces `RailsStarterKit` / `rails_starter_kit` across all config files. Accepts any format — `my_new_app`, `my-new-app`, or `MyNewApp`.
 
 ---
 
-## ✨ Features
+## Features
 
 ### Backend
 - **Ruby on Rails 8**
