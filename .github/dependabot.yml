@@ -17,6 +17,23 @@ updates:
     labels:
       - "dependencies"
       - "javascript"
+    groups:
+      typescript-eslint:
+        patterns:
+          - "@typescript-eslint/*"
+      types:
+        patterns:
+          - "@types/*"
+      vite:
+        patterns:
+          - "vite"
+          - "vite-*"
+          - "@vitejs/*"
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+          - "tw-animate-css"
 
   - package-ecosystem: "github-actions"
     directory: "/"
